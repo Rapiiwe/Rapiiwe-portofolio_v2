@@ -89,12 +89,14 @@ function handleMouseMove(e) {
 }
 
 function handleTouchMove(e) {
+  // Skip particles while scrolling on mobile — improves tap/scroll on Android
+  if (document.body.classList.contains('mobile-nav-open')) return
   createParticle(e)
 }
 
 onMounted(() => {
-  window.addEventListener('mousemove', handleMouseMove)
-  window.addEventListener('touchmove', handleTouchMove)
+  window.addEventListener('mousemove', handleMouseMove, { passive: true })
+  window.addEventListener('touchmove', handleTouchMove, { passive: true })
 })
 
 onUnmounted(() => {

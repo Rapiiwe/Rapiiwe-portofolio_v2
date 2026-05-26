@@ -7,7 +7,7 @@
     </div>
 
     <!-- Tabs -->
-    <div class="timeline-tabs flex justify-center gap-4 mb-8">
+    <div class="timeline-tabs flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
       <button 
         class="neo-btn py-2 px-4 font-mono text-sm" 
         :class="timelineTab === 'education-pane' ? 'btn-pink' : 'btn-secondary'" 

@@ -17,7 +17,7 @@
             <span class="cv-subtitle font-mono font-bold text-sm" style="color: var(--neo-orange);">{{ t('cv-subtitle') }}</span>
           </div>
           <div class="cv-contact-info text-right font-mono text-xs">
-            <span>📧 rafirahmadanizain@gmail.com</span>
+            <span>📧 {{ PROFILE.email }}</span>
             <span>💻 {{ t('cv-contact-major') }}</span>
             <span>🌐 github.com/Rapiiwe</span>
           </div>
@@ -91,6 +91,7 @@
 import { usePortfolio } from '../composables/usePortfolio'
 
 const {
+  PROFILE,
   t,
   playSound
 } = usePortfolio()

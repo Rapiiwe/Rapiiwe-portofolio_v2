@@ -1,5 +1,14 @@
 import { ref, reactive, watch } from 'vue'
 
+/** Profil publik — dipakai di hero, kontak, CV, dan placeholder form */
+export const PROFILE = {
+  fullName: 'Rafi Rahmadani Zain',
+  email: 'rafirahmadanizain@gmail.com',
+  instagram: '@_iamrapii',
+  instagramUrl: 'https://www.instagram.com/_iamrapii?igsh=bWcwYmxndWN6YXE4',
+  github: 'github.com/Rapiiwe'
+}
+
 // Reactive Global States
 const lang = ref('id')
 const soundEnabled = ref(false)
@@ -98,8 +107,10 @@ const TRANSLATIONS = {
     "contact-label-name": "Full Name / Company",
     "contact-label-email": "Your Email Address",
     "contact-label-msg": "Your Message Content",
-    "contact-placeholder-name": "John Doe",
-    "contact-placeholder-email": "john@company.com",
+    "contact-placeholder-name": "Rafi Rahmadani Zain",
+    "contact-placeholder-email": "rafirahmadanizain@gmail.com",
+    "contact-display-name": "Full Name",
+    "contact-display-email": "Email",
     "contact-placeholder-msg": "Tell me about your project...",
     "contact-btn-submit": "🚀 Send Message",
     "experience-coming-soon": "Experience Coming Soon",
@@ -147,7 +158,7 @@ const TRANSLATIONS = {
     "cv-proj2-role": "Independent Project Development",
     "cv-proj2-date": "2024 - 2025",
     "cv-proj2-desc": "Built several personal open-source projects hosted on GitHub, improving skills in Python, HTML, CSS.",
-    "cv-author-name": "Rafi Rahmadani Zain",
+    "cv-author-name": PROFILE.fullName,
     "marquee-frontend": "FRONTEND DEVELOPER",
     "marquee-student": "INFORMATICS STUDENT",
     "marquee-vue": "VUE.JS ENTHUSIAST",
@@ -218,8 +229,10 @@ const TRANSLATIONS = {
     "contact-label-name": "Nama Lengkap / Perusahaan",
     "contact-label-email": "Alamat Email Anda",
     "contact-label-msg": "Isi Pesan Anda",
-    "contact-placeholder-name": "John Doe",
-    "contact-placeholder-email": "john@company.com",
+    "contact-placeholder-name": "Rafi Rahmadani Zain",
+    "contact-placeholder-email": "rafirahmadanizain@gmail.com",
+    "contact-display-name": "Nama Lengkap",
+    "contact-display-email": "Alamat Email",
     "contact-placeholder-msg": "Ceritakan proyek Anda...",
     "contact-btn-submit": "🚀 Kirim Pesan",
     "experience-coming-soon": "Pengalaman Segera Hadir",
@@ -267,7 +280,7 @@ const TRANSLATIONS = {
     "cv-proj2-role": "Pengembangan Proyek Mandiri",
     "cv-proj2-date": "2024 - 2025",
     "cv-proj2-desc": "Membangun beberapa proyek open-source pribadi yang dihosting di GitHub, meningkatkan kemampuan dalam Python, HTML, CSS.",
-    "cv-author-name": "Rafi Rahmadani Zain",
+    "cv-author-name": PROFILE.fullName,
     "marquee-frontend": "FRONTEND DEVELOPER",
     "marquee-student": "MAHASISWA INFORMATIKA",
     "marquee-vue": "VUE.JS ENTHUSIAST",
@@ -692,11 +705,11 @@ async function runDemo() {
     await new Promise(resolve => setTimeout(resolve, 1500))
     if (!demoActive.value) return
 
-    await typeWriterReactive(contactForm, 'name', 'Rafi Rahmadani Zain', 80)
+    await typeWriterReactive(contactForm, 'name', PROFILE.fullName, 80)
     if (!demoActive.value) return
     await new Promise(resolve => setTimeout(resolve, 500))
 
-    await typeWriterReactive(contactForm, 'email', 'rafirahmadanizain@gmail.com', 80)
+    await typeWriterReactive(contactForm, 'email', PROFILE.email, 80)
     if (!demoActive.value) return
     await new Promise(resolve => setTimeout(resolve, 500))
 
@@ -729,6 +742,7 @@ async function runDemo() {
 // Expose States & Actions
 export function usePortfolio() {
   return {
+    PROFILE,
     lang,
     soundEnabled,
     musicEnabled,

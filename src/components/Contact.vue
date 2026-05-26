@@ -1,29 +1,39 @@
 <template>
 <section class="section-neo section-neo--yellow px-margin-mobile md:px-margin-desktop py-12 text-on-background" id="contact">
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20">
     <div>
       <span class="section-num">// 08</span>
       <h2 class="section-title section-title--neo mt-2">{{ t('contact-title') }}</h2>
       <p class="font-body-lg mt-8 mb-12 max-w-md">{{ t('contact-subtitle') }}</p>
       
       <div class="space-y-6">
-        <a href="mailto:rafirahmadanizain@gmail.com" @click="playSound('success')" class="flex items-center gap-6 group cursor-pointer text-left">
-          <div class="w-16 h-16 bg-secondary-container border-border-width border-on-background flex items-center justify-center neo-shadow group-hover:-translate-y-1 transition-transform">
+        <div class="flex items-center gap-6 text-left">
+          <div class="w-16 h-16 bg-primary-container border-border-width border-on-background flex items-center justify-center neo-shadow shrink-0">
+            <span class="material-symbols-outlined text-3xl">badge</span>
+          </div>
+          <div class="min-w-0">
+            <p class="font-label-bold opacity-60 uppercase">{{ t('contact-display-name') }}</p>
+            <p class="font-headline-md text-lg md:text-xl">{{ PROFILE.fullName }}</p>
+          </div>
+        </div>
+
+        <a :href="`mailto:${PROFILE.email}`" @click="playSound('success')" class="flex items-center gap-6 group cursor-pointer text-left">
+          <div class="w-16 h-16 bg-secondary-container border-border-width border-on-background flex items-center justify-center neo-shadow group-hover:-translate-y-1 transition-transform shrink-0">
             <span class="material-symbols-outlined text-3xl">mail</span>
           </div>
-          <div>
-            <p class="font-label-bold opacity-60">EMAIL ME</p>
-            <p class="font-headline-md text-lg md:text-xl break-all">rafirahmadanizain@gmail.com</p>
+          <div class="min-w-0">
+            <p class="font-label-bold opacity-60 uppercase">{{ t('contact-display-email') }}</p>
+            <p class="font-headline-md text-lg md:text-xl break-all">{{ PROFILE.email }}</p>
           </div>
         </a>
         
-        <a href="https://www.instagram.com/_iamrapii?igsh=bWcwYmxndWN6YXE4" target="_blank" @click="playSound('success')" class="flex items-center gap-6 group cursor-pointer text-left">
-          <div class="w-16 h-16 bg-primary-fixed border-border-width border-on-background flex items-center justify-center neo-shadow group-hover:-translate-y-1 transition-transform">
+        <a :href="PROFILE.instagramUrl" target="_blank" rel="noopener noreferrer" @click="playSound('success')" class="flex items-center gap-6 group cursor-pointer text-left">
+          <div class="w-16 h-16 bg-primary-fixed border-border-width border-on-background flex items-center justify-center neo-shadow group-hover:-translate-y-1 transition-transform shrink-0">
             <span class="material-symbols-outlined text-3xl">photo_camera</span>
           </div>
-          <div>
-            <p class="font-label-bold opacity-60">INSTAGRAM</p>
-            <p class="font-headline-md text-lg md:text-xl">@_iamrapii</p>
+          <div class="min-w-0">
+            <p class="font-label-bold opacity-60 uppercase">Instagram</p>
+            <p class="font-headline-md text-lg md:text-xl">{{ PROFILE.instagram }}</p>
           </div>
         </a>
       </div>
@@ -77,6 +87,7 @@
 import { usePortfolio } from '../composables/usePortfolio'
 
 const {
+  PROFILE,
   t,
   playSound,
   contactForm

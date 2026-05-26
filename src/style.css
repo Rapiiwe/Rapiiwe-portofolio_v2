@@ -65,8 +65,159 @@ body::before {
 
 .page-shell {
   position: relative;
-  overflow-x: hidden;
+  overflow-x: clip;
   min-height: 100vh;
+}
+
+/* Safe area for notched phones (Android / iOS) */
+.safe-area-top {
+  padding-top: max(0.75rem, env(safe-area-inset-top));
+}
+
+.safe-area-bottom {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+body.mobile-nav-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
+/* ── Mobile navigation (teleported to body) ── */
+.mobile-nav-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9995;
+  pointer-events: none;
+}
+
+.mobile-nav-backdrop {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--nav-height, 72px);
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+  border: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  pointer-events: auto;
+}
+
+.mobile-nav-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--nav-height, 72px);
+  bottom: 0;
+  max-height: none;
+  overflow-y: auto;
+  pointer-events: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--neo-bg-light);
+  color: var(--neo-black);
+  border-bottom: 4px solid var(--neo-black);
+  box-shadow: 0 12px 0 var(--neo-black);
+  padding: 1.25rem 1.5rem 1.75rem;
+  padding-bottom: max(1.75rem, env(safe-area-inset-bottom));
+}
+
+.mobile-nav-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  min-height: 44px;
+  border-bottom: 2px dashed var(--neo-black);
+  color: var(--neo-black);
+  text-decoration: none;
+  touch-action: manipulation;
+}
+
+.mobile-nav-link:active {
+  color: var(--neo-pink);
+  transform: translateX(4px);
+}
+
+.mobile-nav-enter-active,
+.mobile-nav-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.mobile-nav-enter-active .mobile-nav-panel,
+.mobile-nav-leave-active .mobile-nav-panel {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mobile-nav-enter-from,
+.mobile-nav-leave-to {
+  opacity: 0;
+}
+
+.mobile-nav-enter-from .mobile-nav-panel,
+.mobile-nav-leave-to .mobile-nav-panel {
+  transform: translateY(-12px);
+}
+
+/* Hamburger icon */
+.nav-hamburger {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nav-hamburger:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--neo-black) !important;
+}
+
+.nav-hamburger__line {
+  display: block;
+  width: 1.5rem;
+  height: 3px;
+  background: var(--neo-black);
+  border-radius: 1px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.nav-hamburger--open .nav-hamburger__line:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.nav-hamburger--open .nav-hamburger__line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.nav-hamburger--open .nav-hamburger__line:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
+@media (max-width: 639px) {
+  .hero-sticker {
+    display: none;
+  }
+
+  .section-title--neo {
+    text-shadow:
+      2px 2px 0 var(--neo-black),
+      4px 4px 0 var(--neo-pink);
+  }
+
+  .marquee-content span {
+    font-size: 1rem;
+    padding: 0.25rem 0.65rem;
+  }
+
+  .neo-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 /* Grid visible through hero & glass sections (like reference design) */

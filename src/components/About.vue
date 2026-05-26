@@ -14,7 +14,7 @@
           <div class="w-full aspect-square border-4 border-on-background overflow-hidden bg-white shadow-[4px_4px_0_0_rgba(0,0,0,1)]">
             <img 
               src="https://avatars.githubusercontent.com/u/202292911?v=4" 
-              alt="Rafi Rahmadani Zain" 
+              :alt="PROFILE.fullName" 
               class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
               @mouseenter="playSound('hover')"
             >
@@ -59,6 +59,7 @@ import { onMounted } from 'vue'
 import { usePortfolio } from '../composables/usePortfolio'
 
 const {
+  PROFILE,
   t,
   repoCount,
   reposLoading,

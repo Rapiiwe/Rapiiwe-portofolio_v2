@@ -1,5 +1,5 @@
 <template>
-  <section id="hero" class="section-neo hero-grid-section min-h-[90vh] flex flex-col justify-center px-margin-mobile md:px-margin-desktop py-12 relative overflow-hidden">
+  <section id="hero" class="section-neo hero-grid-section min-h-[min(90vh,900px)] sm:min-h-[90vh] flex flex-col justify-center px-margin-mobile md:px-margin-desktop py-10 sm:py-12 relative overflow-hidden">
     <span class="hero-sticker hero-sticker--1" aria-hidden="true">v3.0 LIVE</span>
     <span class="hero-sticker hero-sticker--2" aria-hidden="true">// neo mode</span>
     <div class="neo-deco neo-deco--circle absolute top-[20%] left-[3%] w-10 h-10 bg-pink opacity-90" aria-hidden="true"></div>
@@ -8,7 +8,7 @@
       <div class="lg:col-span-6 flex flex-col justify-center space-y-6">
         <span class="neo-badge hero-welcome self-start">{{ t('hero-welcome') }}</span>
         <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg uppercase leading-tight font-black section-title--neo">
-          Rafi Rahmadani <span class="hero-name-pop">Zain.</span>
+          <span class="hero-name-pop">{{ PROFILE.fullName }}</span>
         </h1>
         <p class="font-body-lg text-body-lg max-w-xl">
           {{ t('hero-desc') }}
@@ -85,6 +85,7 @@ import { usePortfolio } from '../composables/usePortfolio'
 
 const {
   t,
+  PROFILE,
   lang,
   playSound,
   initDraggable,
@@ -168,8 +169,8 @@ function executeCommand(cmd) {
       : 'Available commands: help, about, skills, journey, projects, contact, clear'
   } else if (cleanCmd === 'about') {
     response = lang.value === 'id'
-      ? 'Rafi Rahmadani Zain - Mahasiswa Teknik Informatika di UPI YPTK Padang. Sangat tertarik dengan web development, desain retro, dan membuat antarmuka web interaktif.'
-      : 'Rafi Rahmadani Zain - Informatics Student at UPI YPTK Padang. Passionate about web development, retro designs, and building interactive web interfaces.'
+      ? `${PROFILE.fullName} - Mahasiswa Teknik Informatika di UPI YPTK Padang. Sangat tertarik dengan web development, desain retro, dan membuat antarmuka web interaktif.`
+      : `${PROFILE.fullName} - Informatics Student at UPI YPTK Padang. Passionate about web development, retro designs, and building interactive web interfaces.`
   } else if (cleanCmd === 'skills') {
     response = lang.value === 'id'
       ? 'Frontend: HTML, CSS, JS, Vue.js, TailwindCSS, Flutter, Bootstrap. Backend: Node.js (dasar), SQL, Python. Alat: Git, GitHub, VS Code.'
@@ -183,7 +184,7 @@ function executeCommand(cmd) {
       ? 'Unggulan: Portfolio Retro, Neo Draw Canvas. Lihat bagian Proyek di bawah untuk melihat repositori GitHub saya!'
       : 'Featured: Retro Portfolio, Neo Draw Canvas. Check out the Projects section below to see my GitHub repositories!'
   } else if (cleanCmd === 'contact') {
-    response = 'Email: rafirahmadanizain@gmail.com | Instagram: @_iamrapii | GitHub: github.com/Rapiiwe'
+    response = `Email: ${PROFILE.email} | Instagram: ${PROFILE.instagram} | GitHub: ${PROFILE.github}`
   } else if (cleanCmd === 'clear') {
     terminalLines.value = []
     terminalInput.value = ''
