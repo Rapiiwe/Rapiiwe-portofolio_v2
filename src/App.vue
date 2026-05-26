@@ -27,6 +27,24 @@
   <Footer />
   </div>
 
+  <!-- Certificate / piagam lightbox -->
+  <div
+    class="lightbox"
+    :class="{ active: lightboxActive }"
+    role="dialog"
+    aria-modal="true"
+    :aria-label="lightboxCaption"
+    @click.self="closeLightbox"
+  >
+    <div class="lightbox-content">
+      <button type="button" class="lightbox-close" aria-label="Close" @click="closeLightbox">×</button>
+      <div class="lightbox-body">
+        <img :src="lightboxImg" class="lightbox-img" :alt="lightboxCaption" />
+        <p class="lightbox-caption">{{ lightboxCaption }}</p>
+      </div>
+    </div>
+  </div>
+
   </div>
 </template>
 
@@ -51,8 +69,19 @@ const {
   lang,
   demoActive,
   demoStatusText,
-  playSound
+  playSound,
+  lightboxActive,
+  lightboxImg,
+  lightboxCaption,
+  closeLightbox
 } = usePortfolio()
+
+function onLightboxKeydown(e) {
+  if (e.key === 'Escape' && lightboxActive.value) {
+    closeLightbox()
+    playSound('click')
+  }
+}
 
 // Particle trail logic
 const particleColors = ['bg-yellow', 'bg-pink', 'bg-cyan', 'bg-green', 'bg-orange']
@@ -97,11 +126,13 @@ function handleTouchMove(e) {
 onMounted(() => {
   window.addEventListener('mousemove', handleMouseMove, { passive: true })
   window.addEventListener('touchmove', handleTouchMove, { passive: true })
+  window.addEventListener('keydown', onLightboxKeydown)
 })
 
 onUnmounted(() => {
   window.removeEventListener('mousemove', handleMouseMove)
   window.removeEventListener('touchmove', handleTouchMove)
+  window.removeEventListener('keydown', onLightboxKeydown)
 })
 
 function stopDemo() {

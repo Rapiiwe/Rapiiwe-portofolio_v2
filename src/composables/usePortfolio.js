@@ -1,5 +1,23 @@
 import { ref, reactive, watch } from 'vue'
 
+/** Piagam / sertifikat — gambar di public/assets */
+export const CERTIFICATE_ITEMS = [
+  {
+    id: 'piagam-2022',
+    image: '/assets/piagam1.jpeg',
+    titleKey: 'cert-piagam-2022-title',
+    issuerKey: 'cert-piagam-issuer',
+    dateKey: 'cert-piagam-2022-date'
+  },
+  {
+    id: 'piagam-2023',
+    image: '/assets/piagam2.jpeg',
+    titleKey: 'cert-piagam-2023-title',
+    issuerKey: 'cert-piagam-issuer',
+    dateKey: 'cert-piagam-2023-date'
+  }
+]
+
 /** Profil publik — dipakai di hero, kontak, CV, dan placeholder form */
 export const PROFILE = {
   fullName: 'Rafi Rahmadani Zain',
@@ -89,9 +107,13 @@ const TRANSLATIONS = {
     "projects-dynamic": "GitHub Dynamic Panel",
     "projects-search-placeholder": "🔍 Search repository name...",
     "certs-title": "Certificates",
-    "certs-coming-soon": "COMING SOON",
-    "certs-status-bar": "STATUS: IN PREPARATION",
-    "certs-in-progress": "// IN PROGRESS",
+    "certs-subtitle": "Academic achievement awards from Desa Silungkang Tigo — tap a card to zoom.",
+    "certs-zoom-hint": "Tap to enlarge",
+    "cert-piagam-2022-title": "Outstanding Student — Academic Field",
+    "cert-piagam-2023-title": "Outstanding Student — Academic Field",
+    "cert-piagam-issuer": "Desa Silungkang Tigo · Kec. Silungkang · Kota Sawahlunto",
+    "cert-piagam-2022-date": "July 8, 2022",
+    "cert-piagam-2023-date": "July 7, 2023",
     "cv-title": "Curriculum Vitae",
     "cv-subtitle": "Web Developer & Informatics Student",
     "cv-contact-major": "Informatics Engineering",
@@ -208,9 +230,13 @@ const TRANSLATIONS = {
     "projects-dynamic": "Panel Dinamis GitHub",
     "projects-search-placeholder": "🔍 Cari nama repositori...",
     "certs-title": "Sertifikat",
-    "certs-coming-soon": "SEGERA HADIR",
-    "certs-status-bar": "STATUS: DALAM PERSIAPAN",
-    "certs-in-progress": "// DALAM PROSES",
+    "certs-subtitle": "Piagam penghargaan prestasi akademik dari Desa Silungkang Tigo — ketuk kartu untuk memperbesar.",
+    "certs-zoom-hint": "Ketuk untuk perbesar",
+    "cert-piagam-2022-title": "Siswa Berprestasi Bidang Akademis",
+    "cert-piagam-2023-title": "Siswa Berprestasi Bidang Akademis",
+    "cert-piagam-issuer": "Desa Silungkang Tigo · Kec. Silungkang · Kota Sawahlunto",
+    "cert-piagam-2022-date": "8 Juli 2022",
+    "cert-piagam-2023-date": "7 Juli 2023",
     "marquee-neo": "NEOBRUTAL",
     "marquee-open": "TERBUKA UNTUK KERJA",
     "marquee-brand": "rapiiwe.github.io",
@@ -739,10 +765,27 @@ async function runDemo() {
   }
 }
 
+function openLightbox(imageSrc, caption) {
+  lightboxImg.value = imageSrc
+  lightboxCaption.value = caption
+  lightboxActive.value = true
+  if (typeof document !== 'undefined') {
+    document.body.classList.add('lightbox-open')
+  }
+}
+
+function closeLightbox() {
+  lightboxActive.value = false
+  if (typeof document !== 'undefined') {
+    document.body.classList.remove('lightbox-open')
+  }
+}
+
 // Expose States & Actions
 export function usePortfolio() {
   return {
     PROFILE,
+    CERTIFICATE_ITEMS,
     lang,
     soundEnabled,
     musicEnabled,
@@ -773,6 +816,8 @@ export function usePortfolio() {
     initDraggable,
     lightboxActive,
     lightboxImg,
-    lightboxCaption
+    lightboxCaption,
+    openLightbox,
+    closeLightbox
   }
 }
