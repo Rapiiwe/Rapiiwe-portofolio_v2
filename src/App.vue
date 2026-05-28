@@ -83,18 +83,16 @@ function onLightboxKeydown(e) {
   }
 }
 
-// Particle trail logic
 const particleColors = ['bg-yellow', 'bg-pink', 'bg-cyan', 'bg-green', 'bg-orange']
 
 function createParticle(e) {
-  // Throttle particle creation a bit (e.g. 35% chance) to avoid cluttering screen
   if (Math.random() > 0.35) return
 
   const x = e.pageX || (e.touches && e.touches[0].pageX)
   const y = e.pageY || (e.touches && e.touches[0].pageY)
   if (!x || !y) return
 
-  const size = Math.floor(Math.random() * 8) + 8 // 8px to 16px
+  const size = Math.floor(Math.random() * 8) + 8
   const rotation = Math.floor(Math.random() * 360)
   const randomColor = particleColors[Math.floor(Math.random() * particleColors.length)]
 
@@ -118,7 +116,6 @@ function handleMouseMove(e) {
 }
 
 function handleTouchMove(e) {
-  // Skip particles while scrolling on mobile — improves tap/scroll on Android
   if (document.body.classList.contains('mobile-nav-open')) return
   createParticle(e)
 }

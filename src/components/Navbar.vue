@@ -3,7 +3,6 @@
     ref="navRef"
     class="sticky top-0 w-full z-[10001] flex justify-between items-center px-margin-mobile md:px-margin-desktop py-3 md:py-4 bg-yellow border-b-4 border-on-background shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] safe-area-top"
   >
-    <!-- Logo -->
     <a
       href="https://rapiiwe.github.io"
       target="_blank"
@@ -15,7 +14,6 @@
       rapiiwe.github.io
     </a>
 
-    <!-- Desktop Navigation Links -->
     <div class="hidden xl:flex gap-6 items-center">
       <a class="nav-link-neo text-on-background transition-transform" href="#about" @click="handleLinkClick" @mouseenter="playSound('hover')">{{ t('nav-about') }}</a>
       <a class="nav-link-neo text-on-background transition-transform" href="#skills" @click="handleLinkClick" @mouseenter="playSound('hover')">{{ t('nav-skills') }}</a>
@@ -27,7 +25,6 @@
       <a class="nav-link-neo text-on-background transition-transform" href="#contact" @click="handleLinkClick" @mouseenter="playSound('hover')">{{ t('nav-contact') }}</a>
     </div>
 
-    <!-- Desktop action buttons -->
     <div class="hidden lg:flex gap-2 items-center shrink-0">
       <button type="button" @click="runDemo" @mouseenter="playSound('hover')" class="neo-btn btn-green py-1.5 px-3 text-xs" :class="{ 'btn-pink': demoActive }">
         {{ demoActive ? t('nav-demo-stop') : t('nav-demo-play') }}
@@ -46,7 +43,6 @@
       </button>
     </div>
 
-    <!-- Mobile: demo + hamburger -->
     <div class="xl:hidden flex items-center gap-2 sm:gap-3 shrink-0">
       <button
         type="button"
@@ -76,7 +72,6 @@
     </div>
   </nav>
 
-  <!-- Teleport: fixed menu must not sit inside overflow-hidden .page-shell -->
   <Teleport to="body">
     <Transition name="mobile-nav">
       <div

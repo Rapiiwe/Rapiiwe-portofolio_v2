@@ -1,14 +1,11 @@
 <template>
   <section id="pixel-drawer" class="section-neo px-margin-mobile md:px-margin-desktop py-12 bg-background text-on-background">
-    <!-- Header -->
     <div class="section-header">
       <span class="section-num">// 07</span>
       <h2 class="section-title section-title--neo">{{ t('draw-title') }}</h2>
     </div>
 
-    <!-- Pixel Canvas Widget -->
     <div class="pixel-canvas-widget flex flex-col md:flex-row gap-8 items-center justify-center">
-      <!-- 16x16 Canvas Grid -->
       <div 
         class="pixel-grid-container select-none"
         @mouseleave="isDrawing = false"
@@ -23,7 +20,6 @@
         ></div>
       </div>
 
-      <!-- Controls -->
       <div class="pixel-controls flex flex-col items-start gap-4 max-w-sm">
         <div>
           <h4 class="pixel-color-picker-label font-mono font-bold text-xs uppercase text-left mb-2">{{ t('draw-color-tool') }}</h4>
@@ -75,6 +71,8 @@ const colors = [
   { value: '#FFF500', class: 'bg-yellow' },
   { value: '#39FF14', class: 'bg-green' },
   { value: '#FF5F00', class: 'bg-orange' },
+  { value: '#A367B1', class: 'bg-purple' },
+  { value: '#3A4DFF', class: 'bg-blue' },
   { value: '#000000', class: 'bg-black' },
   { value: '#FFFFFF', class: 'bg-white' }
 ]
@@ -114,7 +112,6 @@ onUnmounted(() => {
   window.removeEventListener('mouseup', handleGlobalMouseUp)
 })
 
-// Watch coordinate commands from Auto-Demo
 watch(pixelDrawerDrawCoordinates, (coord) => {
   if (coord) {
     const idx = coord.r * 16 + coord.c
@@ -127,17 +124,14 @@ function clearGrid() {
   grid.value = Array(256).fill('#FFFFFF')
 }
 
-// Download canvas as PNG
 function downloadPNG() {
   playSound('success')
   
-  // Create an offscreen HTML5 canvas
   const canvas = document.createElement('canvas')
   canvas.width = 256
   canvas.height = 256
   const ctx = canvas.getContext('2d')
   
-  // Scale factor: each pixel cell is 16x16 in output image
   const cellSize = 16
   
   for (let r = 0; r < 16; r++) {
@@ -148,7 +142,6 @@ function downloadPNG() {
     }
   }
   
-  // Trigger download
   const link = document.createElement('a')
   link.download = 'pixel_art.png'
   link.href = canvas.toDataURL('image/png')

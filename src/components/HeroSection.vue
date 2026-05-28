@@ -4,7 +4,6 @@
     <span class="hero-sticker hero-sticker--2" aria-hidden="true">// neo mode</span>
     <div class="neo-deco neo-deco--circle absolute top-[20%] left-[3%] w-10 h-10 bg-pink opacity-90" aria-hidden="true"></div>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center relative z-10">
-      <!-- Intro Info (Left) -->
       <div class="lg:col-span-6 flex flex-col justify-center space-y-6">
         <span class="neo-badge hero-welcome self-start">{{ t('hero-welcome') }}</span>
         <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg uppercase leading-tight font-black section-title--neo">
@@ -26,9 +25,7 @@
         </div>
       </div>
 
-      <!-- Draggable Terminal & Stats (Right) -->
       <div class="lg:col-span-6 flex flex-col gap-6 relative">
-        <!-- Interactive Terminal Jendela -->
         <div ref="terminalWindow" class="neo-window w-full select-none" style="z-index: 10;">
           <div ref="terminalHeader" class="window-header draggable">
             <span>{{ t('terminal-session') }}</span>
@@ -59,7 +56,6 @@
           </div>
         </div>
 
-        <!-- Stats Board -->
         <div class="stats-board select-none">
           <div class="stats-board-row">
             <span class="stats-board-label">{{ t('about-stat-local') }}</span>
@@ -101,7 +97,6 @@ const terminalLines = ref([
   t('terminal-hint')
 ])
 
-// Reset terminal welcome lines when language changes
 watch(lang, () => {
   terminalLines.value = [
     t('terminal-welcome'),
@@ -137,12 +132,10 @@ onUnmounted(() => {
   if (timeInterval) clearInterval(timeInterval)
 })
 
-// Watch terminal command input from usePortfolio for auto-typing
 watch(terminalCommandInput, (newVal) => {
   terminalInput.value = newVal
 })
 
-// Watch terminal execute trigger from usePortfolio
 watch(terminalExecuteTrigger, () => {
   if (terminalInput.value.trim()) {
     executeCommand(terminalInput.value)
@@ -157,11 +150,9 @@ function executeCommand(cmd) {
   const cleanCmd = cmd.trim().toLowerCase()
   if (!cleanCmd) return
 
-  // Append user command
   terminalLines.value.push(`tamu@rafi-pc:~$ ${cmd}`)
   playSound('click')
 
-  // Process command
   let response = ''
   if (cleanCmd === 'help') {
     response = lang.value === 'id' 
@@ -200,7 +191,6 @@ function executeCommand(cmd) {
   terminalInput.value = ''
   terminalCommandInput.value = ''
   
-  // Auto scroll terminal body
   setTimeout(() => {
     const termBody = document.querySelector('.terminal')
     if (termBody) {

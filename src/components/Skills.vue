@@ -1,19 +1,15 @@
 <template>
   <section id="skills" class="section-neo px-margin-mobile md:px-margin-desktop py-12 bg-background text-on-background">
-    <!-- Header -->
     <div class="section-header">
       <span class="section-num">// 02</span>
       <h2 class="section-title section-title--neo">{{ t('skills-title') }}</h2>
     </div>
 
-    <!-- 3-Column Skills Layout -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       
-      <!-- Column 1: Frontend -->
       <div class="flex flex-col gap-4">
         <h3 class="skills-column-title shadow-[2px_2px_0_0_rgba(0,0,0,1)]">{{ t('skills-frontend') }}</h3>
         <div class="flex flex-col gap-4">
-          <!-- HTML5 -->
           <div 
             class="skill-tag-card" 
             :class="{ 'demo-highlight': skillsHighlightIndex === 0 }"

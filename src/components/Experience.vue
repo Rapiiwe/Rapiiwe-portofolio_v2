@@ -1,6 +1,5 @@
 <template>
   <section id="timeline" class="section-neo section-neo--cyan px-margin-mobile md:px-margin-desktop py-12 text-on-background">
-    <!-- Header -->
     <div class="section-header">
       <span class="section-num">// 03</span>
       <h2 class="section-title section-title--neo">{{ t('journey-title') }}</h2>
@@ -24,9 +23,7 @@
       </button>
     </div>
 
-    <!-- Education Pane -->
     <div v-show="timelineTab === 'education-pane'" class="timeline-pane active">
-      <!-- Card 1 -->
       <div class="timeline-card bg-pink">
         <div class="timeline-meta">
           <span class="timeline-date font-mono">2024 - {{ t('journey-present') }}</span>
@@ -42,7 +39,6 @@
         </div>
       </div>
 
-      <!-- Card 2 -->
       <div class="timeline-card bg-green">
         <div class="timeline-meta">
           <span class="timeline-date font-mono">2023 - {{ t('journey-present') }}</span>
@@ -59,7 +55,6 @@
       </div>
     </div>
 
-    <!-- Experience Pane -->
     <div v-show="timelineTab === 'experience-pane'" class="timeline-pane active">
       <div class="timeline-card bg-yellow flex flex-col items-center text-center p-8">
         <div class="text-5xl mb-4">💼</div>

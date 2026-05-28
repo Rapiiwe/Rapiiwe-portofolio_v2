@@ -1,16 +1,13 @@
 <template>
   <section id="cv" class="section-neo section-neo--pink px-margin-mobile md:px-margin-desktop py-12 text-on-background">
-    <!-- Header -->
     <div class="section-header">
       <span class="section-num">// 06</span>
       <h2 class="section-title section-title--neo">{{ t('cv-title') }}</h2>
     </div>
 
-    <!-- CV Sheet Container -->
     <div class="cv-container">
       <div class="cv-panel text-left">
         
-        <!-- CV Info Header -->
         <div class="cv-header">
           <div>
             <h3 class="cv-name font-heading font-black">{{ t('cv-author-name') }}</h3>
@@ -23,7 +20,6 @@
           </div>
         </div>
 
-        <!-- Section: Education -->
         <div class="cv-section">
           <h4 class="cv-section-title font-heading font-black">{{ t('journey-tab-edu') }}</h4>
           <div class="cv-item mt-4">
@@ -36,7 +32,6 @@
           </div>
         </div>
 
-        <!-- Section: Core Skills -->
         <div class="cv-section">
           <h4 class="cv-section-title font-heading font-black">{{ t('cv-core-title') }}</h4>
           <div class="cv-skills-grid mt-4">
@@ -55,7 +50,6 @@
           </div>
         </div>
 
-        <!-- Section: Project History -->
         <div class="cv-section">
           <h4 class="cv-section-title font-heading font-black">{{ t('cv-projects-title') }}</h4>
           <div class="cv-item mt-4">
@@ -77,7 +71,6 @@
 
       </div>
 
-      <!-- Action Button Footer (hidden in print) -->
       <div class="cv-action-footer mt-6">
         <button @click="printCV" @mouseenter="playSound('hover')" class="neo-btn btn-pink text-xs">
           🖨 {{ t('cv-print-btn') }}

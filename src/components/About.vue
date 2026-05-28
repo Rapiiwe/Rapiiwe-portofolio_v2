@@ -1,14 +1,11 @@
 <template>
   <section id="about" class="section-neo section-neo--yellow px-margin-mobile md:px-margin-desktop py-12 text-on-background">
-    <!-- Header -->
     <div class="section-header">
       <span class="section-num">// 01</span>
       <h2 class="section-title section-title--neo">{{ t('about-title') }}</h2>
     </div>
 
-    <!-- Layout -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      <!-- Photo Card (Left) -->
       <div class="lg:col-span-4 flex flex-col items-center">
         <div class="neo-card bg-yellow p-4 w-full max-w-sm flex flex-col items-center">
           <div class="w-full aspect-square border-4 border-on-background overflow-hidden bg-white shadow-[4px_4px_0_0_rgba(0,0,0,1)]">
@@ -25,16 +22,13 @@
         </div>
       </div>
 
-      <!-- Details & Stats (Right) -->
       <div class="lg:col-span-8 flex flex-col gap-6">
-        <!-- Bio text -->
         <div class="neo-card bg-white p-6 md:p-8 font-body-lg text-body-lg flex flex-col gap-4 text-left leading-relaxed">
           <p>{{ t('about-p1') }}</p>
           <p>{{ t('about-p2') }}</p>
           <p>{{ t('about-p3') }}</p>
         </div>
 
-        <!-- Stats Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="neo-card bg-yellow p-6 flex flex-col items-center text-center">
             <div class="stat-num-pop font-display text-4xl md:text-5xl font-black mb-2 font-mono text-on-background select-none">{{ reposLoading ? '...' : repoCount }}</div>

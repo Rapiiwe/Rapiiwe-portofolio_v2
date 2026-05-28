@@ -1,6 +1,5 @@
 <template>
   <section id="projects" class="section-neo section-neo--green px-margin-mobile md:px-margin-desktop py-12 text-on-background">
-    <!-- Header -->
     <div class="section-header">
       <span class="section-num">// 04</span>
       <h2 class="section-title section-title--neo">{{ t('projects-title') }}</h2>
@@ -9,7 +8,6 @@
     <!-- Featured Projects -->
     <h3 class="curated-title font-heading text-2xl font-black uppercase mb-6 text-left">// {{ t('projects-curated') }}</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-      <!-- Project 1 -->
       <div @mouseenter="playSound('hover')" class="neo-card project-card-neo bg-white flex flex-col p-4">
         <div class="w-full h-56 border-4 border-on-background overflow-hidden shadow-[3px_3px_0_0_rgba(0,0,0,1)] bg-background">
           <img 
@@ -37,7 +35,6 @@
         </div>
       </div>
 
-      <!-- Project 2 -->
       <div @mouseenter="playSound('hover')" class="neo-card project-card-neo bg-white flex flex-col p-4">
         <div class="w-full h-56 border-4 border-on-background overflow-hidden shadow-[3px_3px_0_0_rgba(0,0,0,1)] bg-background">
           <img 
@@ -63,7 +60,6 @@
       </div>
     </div>
 
-    <!-- GitHub Dynamic Panel Window -->
     <div ref="githubWindow" class="neo-window select-none w-full" style="z-index: 10;">
       <div ref="githubHeader" class="window-header draggable" style="background-color: var(--neo-green); color: var(--neo-black);">
         <span>{{ t('projects-dynamic') }} {{ t('projects-drag-me') }}</span>
@@ -77,7 +73,6 @@
       <div class="window-body text-left" style="background-color: var(--neo-white);">
         <div class="flex flex-col gap-6">
           
-          <!-- Filters & Search -->
           <div class="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
             <input 
               type="text" 
@@ -88,7 +83,6 @@
               @input="playSound('hover')"
             >
             
-            <!-- Language Filter Pills -->
             <div class="flex flex-wrap gap-2 items-center">
               <span 
                 class="neo-badge cursor-pointer" 
@@ -110,7 +104,6 @@
             </div>
           </div>
 
-          <!-- Loader or Repository Grid -->
           <div v-if="reposLoading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div v-for="i in 3" :key="i" class="skeleton-card">
               <div class="skeleton-shimmer skeleton-header"></div>

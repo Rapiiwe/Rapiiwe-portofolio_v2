@@ -27,14 +27,12 @@ export const PROFILE = {
   github: 'github.com/Rapiiwe'
 }
 
-// Reactive Global States
 const lang = ref('id')
 const soundEnabled = ref(false)
 const musicEnabled = ref(false)
 const demoActive = ref(false)
 const topZIndex = ref(20)
 
-// Auto-Demo Coordinating States
 const demoStatusText = ref('')
 const terminalCommandInput = ref('')
 const terminalExecuteTrigger = ref(0)
@@ -49,24 +47,20 @@ const contactForm = reactive({
   message: ''
 })
 
-// Lightbox Global State
 const lightboxActive = ref(false)
 const lightboxImg = ref('')
 const lightboxCaption = ref('')
 
-// Github Repos state
 const githubRepos = ref([])
-const repoCount = ref(4) // default fallback count
+const repoCount = ref(4)
 const reposLoading = ref(true)
 
-// Music object
 let musicAudio = null
 if (typeof window !== 'undefined') {
   musicAudio = new Audio('https://www.image2url.com/r2/default/audio/1779271457477-053dfbcc-80fb-4bb5-bd76-ebab09f3fb14.mp3')
   musicAudio.loop = true
 }
 
-// Translations dictionary
 const TRANSLATIONS = {
   en: {
     "nav-about": "About",
@@ -316,7 +310,6 @@ const TRANSLATIONS = {
   }
 }
 
-// Translate — reads lang.value so templates & scripts stay reactive on language switch
 function t(key, fallback) {
   const currentLang = lang.value
   if (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key] !== undefined) {
@@ -328,7 +321,6 @@ function t(key, fallback) {
   return fallback !== undefined ? fallback : key
 }
 
-// Web Audio API Synthesizer
 function playSound(type) {
   if (!soundEnabled.value) return
 
@@ -381,7 +373,6 @@ function playSound(type) {
   }
 }
 
-// Watchers for Sound/Music
 watch(musicEnabled, (val) => {
   if (!musicAudio) return
   if (val) {
@@ -394,7 +385,6 @@ watch(musicEnabled, (val) => {
   }
 })
 
-// Toggle actions
 function toggleLanguage() {
   lang.value = lang.value === 'id' ? 'en' : 'id'
   if (typeof document !== 'undefined') {
@@ -415,7 +405,6 @@ function toggleMusic() {
   playSound('click')
 }
 
-// Color Palette Shuffle
 const colorPaletteClasses = ['bg-yellow', 'bg-green', 'bg-pink', 'bg-cyan', 'bg-orange', 'bg-purple', 'bg-white']
 function shuffleColors() {
   playSound('success')
@@ -427,7 +416,6 @@ function shuffleColors() {
   cards.forEach((card) => {
     colorPaletteClasses.forEach((cls) => {
       card.classList.remove(cls)
-      // Strip Tailwind color utilities that might override it
       card.classList.remove('bg-surface-container-highest', 'bg-primary-container', 'bg-secondary-container', 'bg-surface-container-low', 'bg-surface-container')
     })
     card.classList.remove('bg-blue')
@@ -437,7 +425,6 @@ function shuffleColors() {
   })
 }
 
-// Github API fetch
 const LANG_COLORS = {
   JavaScript: '#f7df1e',
   TypeScript: '#3178c6',
@@ -513,7 +500,6 @@ async function fetchGitHubRepos() {
   }
 }
 
-// Window Draggable logic (helper for ref-based templates)
 function bringToFront(el) {
   topZIndex.value++
   el.style.zIndex = topZIndex.value
@@ -575,7 +561,6 @@ function initDraggable(el, headerEl) {
   }
 }
 
-// Typewriter helper for simple refs
 async function typeWriter(targetRef, text, delay = 100) {
   targetRef.value = ''
   for (let i = 0; i < text.length; i++) {
@@ -586,7 +571,6 @@ async function typeWriter(targetRef, text, delay = 100) {
   }
 }
 
-// Typewriter helper for reactive object properties
 async function typeWriterReactive(obj, key, text, delay = 80) {
   obj[key] = ''
   for (let i = 0; i < text.length; i++) {
@@ -597,7 +581,6 @@ async function typeWriterReactive(obj, key, text, delay = 80) {
   }
 }
 
-// Run Auto-Demo sequence
 async function runDemo() {
   if (demoActive.value) {
     demoActive.value = false
@@ -606,7 +589,7 @@ async function runDemo() {
   }
 
   demoActive.value = true
-  soundEnabled.value = true // automatically turn on sound for maximum wow factor
+  soundEnabled.value = true
   
   const scrollTo = (selector) => {
     const el = document.querySelector(selector)
@@ -616,7 +599,6 @@ async function runDemo() {
   }
 
   try {
-    // 1. HERO & TERMINAL
     scrollTo('#hero')
     demoStatusText.value = 'Membuka Sesi Terminal Tamu...'
     await new Promise(resolve => setTimeout(resolve, 1500))
@@ -640,13 +622,11 @@ async function runDemo() {
     await new Promise(resolve => setTimeout(resolve, 3000))
     if (!demoActive.value) return
 
-    // 2. ABOUT
     scrollTo('#about')
     demoStatusText.value = 'Mempelajari Profil & Statistik...'
     await new Promise(resolve => setTimeout(resolve, 2500))
     if (!demoActive.value) return
 
-    // 3. SKILLS
     scrollTo('#skills')
     demoStatusText.value = 'Menelusuri Keahlian & Senjata...'
     for (let i = 0; i < 8; i++) {
@@ -659,7 +639,6 @@ async function runDemo() {
     await new Promise(resolve => setTimeout(resolve, 1000))
     if (!demoActive.value) return
 
-    // 4. TIMELINE / EXPERIENCE
     scrollTo('#timeline')
     demoStatusText.value = 'Membuka Riwayat Perjalanan...'
     await new Promise(resolve => setTimeout(resolve, 1000))
@@ -675,7 +654,6 @@ async function runDemo() {
     await new Promise(resolve => setTimeout(resolve, 1500))
     if (!demoActive.value) return
 
-    // 5. PROJECTS
     scrollTo('#projects')
     demoStatusText.value = 'Mengecek Repositori GitHub...'
     await new Promise(resolve => setTimeout(resolve, 1500))
@@ -697,13 +675,11 @@ async function runDemo() {
     playSound('click')
     await new Promise(resolve => setTimeout(resolve, 1000))
 
-    // 6. PIXEL DRAWER
     scrollTo('#pixel-drawer')
     demoStatusText.value = 'Menggambar Seni Piksel Retro...'
     await new Promise(resolve => setTimeout(resolve, 1500))
     if (!demoActive.value) return
 
-    // Coordinates for drawing a heart shape on 16x16 grid (0-indexed)
     const heartCoords = [
       { r: 3, c: 4 }, { r: 3, c: 5 }, { r: 3, c: 10 }, { r: 3, c: 11 },
       { r: 4, c: 3 }, { r: 4, c: 4 }, { r: 4, c: 5 }, { r: 4, c: 6 }, { r: 4, c: 9 }, { r: 4, c: 10 }, { r: 4, c: 11 }, { r: 4, c: 12 },
@@ -725,7 +701,6 @@ async function runDemo() {
     await new Promise(resolve => setTimeout(resolve, 1500))
     if (!demoActive.value) return
 
-    // 7. CONTACT
     scrollTo('#contact')
     demoStatusText.value = 'Mengisi Form Kontak...'
     await new Promise(resolve => setTimeout(resolve, 1500))
@@ -752,7 +727,6 @@ async function runDemo() {
     contactForm.email = ''
     contactForm.message = ''
 
-    // 8. FINISH
     scrollTo('#hero')
     demoStatusText.value = 'Demo Selesai! Terima Kasih!'
     playSound('success')
@@ -781,7 +755,6 @@ function closeLightbox() {
   }
 }
 
-// Expose States & Actions
 export function usePortfolio() {
   return {
     PROFILE,
