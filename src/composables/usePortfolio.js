@@ -30,6 +30,7 @@ export const PROFILE = {
 const lang = ref('id')
 const soundEnabled = ref(false)
 const musicEnabled = ref(false)
+const themeMode = ref('dark')
 const demoActive = ref(false)
 const topZIndex = ref(20)
 
@@ -59,6 +60,26 @@ let musicAudio = null
 if (typeof window !== 'undefined') {
   musicAudio = new Audio('https://www.image2url.com/r2/default/audio/1779271457477-053dfbcc-80fb-4bb5-bd76-ebab09f3fb14.mp3')
   musicAudio.loop = true
+}
+
+function applyTheme(mode) {
+  if (typeof document === 'undefined') return
+  const html = document.documentElement
+  html.classList.remove('dark', 'light')
+  html.classList.add(mode)
+  const themeColorMeta = document.querySelector('meta[name="theme-color"]')
+  if (themeColorMeta) {
+    themeColorMeta.setAttribute('content', mode === 'dark' ? '#111111' : '#f4f3ef')
+  }
+}
+
+if (typeof window !== 'undefined') {
+  const savedTheme = window.localStorage.getItem('theme-mode')
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  themeMode.value = savedTheme === 'light' || savedTheme === 'dark'
+    ? savedTheme
+    : (prefersDark ? 'dark' : 'light')
+  applyTheme(themeMode.value)
 }
 
 const TRANSLATIONS = {
@@ -152,6 +173,8 @@ const TRANSLATIONS = {
     "nav-sound-off": "🔇 Sound: OFF",
     "nav-music-on": "🎵 Music: ON",
     "nav-music-off": "🎵 Music: OFF",
+    "nav-theme-dark": "🌙 Dark",
+    "nav-theme-light": "☀ Light",
     "nav-shuffle": "🎨 Shuffle",
     "nav-demo-play": "🎮 Play Demo",
     "nav-demo-stop": "🛑 Stop Demo",
@@ -278,6 +301,8 @@ const TRANSLATIONS = {
     "nav-sound-off": "🔇 Suara: Mati",
     "nav-music-on": "🎵 Musik: Aktif",
     "nav-music-off": "🎵 Musik: Mati",
+    "nav-theme-dark": "🌙 Gelap",
+    "nav-theme-light": "☀ Terang",
     "nav-shuffle": "🎨 Acak Warna",
     "nav-demo-play": "🎮 Play Demo",
     "nav-demo-stop": "🛑 Stop Demo",
@@ -385,6 +410,13 @@ watch(musicEnabled, (val) => {
   }
 })
 
+watch(themeMode, (mode) => {
+  applyTheme(mode)
+  if (typeof window !== 'undefined') {
+    window.localStorage.setItem('theme-mode', mode)
+  }
+})
+
 function toggleLanguage() {
   lang.value = lang.value === 'id' ? 'en' : 'id'
   if (typeof document !== 'undefined') {
@@ -402,6 +434,11 @@ function toggleSound() {
 
 function toggleMusic() {
   musicEnabled.value = !musicEnabled.value
+  playSound('click')
+}
+
+function toggleTheme() {
+  themeMode.value = themeMode.value === 'dark' ? 'light' : 'dark'
   playSound('click')
 }
 
@@ -762,6 +799,7 @@ export function usePortfolio() {
     lang,
     soundEnabled,
     musicEnabled,
+    themeMode,
     demoActive,
     topZIndex,
     demoStatusText,
@@ -779,6 +817,7 @@ export function usePortfolio() {
     toggleLanguage,
     toggleSound,
     toggleMusic,
+    toggleTheme,
     shuffleColors,
     githubRepos,
     repoCount,

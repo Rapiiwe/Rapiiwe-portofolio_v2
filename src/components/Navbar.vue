@@ -41,6 +41,9 @@
       <button type="button" @click="toggleMusic" @mouseenter="playSound('hover')" class="neo-btn btn-secondary py-1.5 px-3 text-xs">
         {{ musicEnabled ? t('nav-music-on') : t('nav-music-off') }}
       </button>
+      <button type="button" @click="toggleTheme" @mouseenter="playSound('hover')" class="neo-btn btn-secondary py-1.5 px-3 text-xs">
+        {{ themeMode === 'dark' ? t('nav-theme-light') : t('nav-theme-dark') }}
+      </button>
     </div>
 
     <div class="xl:hidden flex items-center gap-2 sm:gap-3 shrink-0">
@@ -119,6 +122,9 @@
             <button type="button" @click="toggleMusic()" class="neo-btn btn-secondary text-xs py-2.5 col-span-2 min-h-[44px]">
               {{ musicEnabled ? t('nav-music-on') : t('nav-music-off') }}
             </button>
+            <button type="button" @click="toggleTheme()" class="neo-btn btn-secondary text-xs py-2.5 col-span-2 min-h-[44px]">
+              {{ themeMode === 'dark' ? t('nav-theme-light') : t('nav-theme-dark') }}
+            </button>
           </div>
         </div>
       </div>
@@ -134,12 +140,14 @@ const {
   lang,
   soundEnabled,
   musicEnabled,
+  themeMode,
   demoActive,
   t,
   playSound,
   toggleLanguage,
   toggleSound,
   toggleMusic,
+  toggleTheme,
   shuffleColors,
   runDemo
 } = usePortfolio()

@@ -4,6 +4,7 @@
 @config "../tailwind.config.js";
 
 :root {
+  color-scheme: dark;
   --neo-yellow: #FFF500;
   --neo-green: #39FF14;
   --neo-pink: #FF007F;
@@ -28,6 +29,71 @@
   --font-heading: 'Archivo Black', 'Outfit', sans-serif;
   --font-body: 'Space Grotesk', sans-serif;
   --font-mono: 'Space Mono', monospace;
+
+  --app-bg: #151515;
+  --app-fg: #ECEBE7;
+  --app-grid-line: rgba(255, 255, 255, 0.055);
+  --app-scanline: rgba(255, 255, 255, 0.09);
+  --hero-fg: #F1F0EC;
+  --hero-subtext: rgba(241, 240, 236, 0.86);
+  --hero-bg:
+    radial-gradient(circle at 18% 16%, rgba(255, 0, 127, 0.10), transparent 44%),
+    radial-gradient(circle at 82% 14%, rgba(0, 240, 255, 0.09), transparent 50%),
+    linear-gradient(180deg, #171717 0%, #121212 100%);
+  --mobile-panel-bg: #1B1B1B;
+  --mobile-panel-fg: #F0EFEB;
+  --mobile-panel-border: rgba(255, 255, 255, 0.24);
+  --glass-bg: rgba(23, 23, 23, 0.70);
+  --stats-bg: rgba(27, 27, 27, 0.90);
+  --stats-fg: #ECEBE7;
+  --neo-pink-band: rgba(255, 0, 127, 0.12);
+  --btn-default-bg: #E7D85A;
+  --btn-default-text: #121212;
+  --btn-default-hover-bg: #7CEDE8;
+  --btn-pink-bg: #D96AAB;
+  --btn-pink-hover-bg: #9DDE89;
+  --btn-green-bg: #86D679;
+  --btn-green-hover-bg: #E6BC73;
+  --btn-cyan-bg: #73D9E6;
+  --btn-cyan-hover-bg: #E7D85A;
+  --btn-secondary-bg: #F0ECE2;
+  --btn-secondary-hover-bg: #E7D85A;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
+  --app-bg: #F7F5F0;
+  --app-fg: #181818;
+  --app-grid-line: rgba(0, 0, 0, 0.06);
+  --app-scanline: rgba(0, 0, 0, 0.08);
+  --hero-fg: #171717;
+  --hero-subtext: rgba(24, 24, 24, 0.78);
+  --hero-bg:
+    radial-gradient(circle at 18% 16%, rgba(255, 0, 127, 0.10), transparent 46%),
+    radial-gradient(circle at 82% 14%, rgba(0, 176, 196, 0.12), transparent 52%),
+    linear-gradient(180deg, #fbfaf7 0%, #f2eee6 100%);
+  --mobile-panel-bg: #FBF9F4;
+  --mobile-panel-fg: #181818;
+  --mobile-panel-border: rgba(0, 0, 0, 0.22);
+  --glass-bg: rgba(255, 255, 255, 0.78);
+  --stats-bg: rgba(255, 255, 255, 0.92);
+  --stats-fg: #181818;
+  --neo-pink-band: rgba(255, 0, 127, 0.09);
+  --btn-default-bg: #F2E48C;
+  --btn-default-text: #181818;
+  --btn-default-hover-bg: #AEEEF4;
+  --btn-pink-bg: #F3B3D8;
+  --btn-pink-hover-bg: #BFE9AF;
+  --btn-green-bg: #CBEFB4;
+  --btn-green-hover-bg: #F4CDA3;
+  --btn-cyan-bg: #B9EEF4;
+  --btn-cyan-hover-bg: #F2E48C;
+  --btn-secondary-bg: #FFFFFF;
+  --btn-secondary-hover-bg: #F2E48C;
 }
 
 /* ── Page shell & retro atmosphere ── */
@@ -37,14 +103,14 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: #FFFFFF;
+  background-color: var(--app-bg);
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    linear-gradient(var(--app-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--app-grid-line) 1px, transparent 1px);
   background-size: 40px 40px;
   background-attachment: fixed;
   position: relative;
-  color: #000000;
+  color: var(--app-fg);
 }
 
 body::before {
@@ -53,13 +119,13 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 9998;
-  opacity: 0.04;
+  opacity: 0.08;
   background: repeating-linear-gradient(
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 0, 0, 0.15) 2px,
-    rgba(0, 0, 0, 0.15) 4px
+    var(--app-scanline) 2px,
+    var(--app-scanline) 4px
   );
 }
 
@@ -114,8 +180,8 @@ body.mobile-nav-open {
   overflow-y: auto;
   pointer-events: auto;
   -webkit-overflow-scrolling: touch;
-  background: var(--neo-bg-light);
-  color: var(--neo-black);
+  background: var(--mobile-panel-bg);
+  color: var(--mobile-panel-fg);
   border-bottom: 4px solid var(--neo-black);
   box-shadow: 0 12px 0 var(--neo-black);
   padding: 1.25rem 1.5rem 1.75rem;
@@ -129,8 +195,8 @@ body.mobile-nav-open {
   gap: 1rem;
   padding: 0.75rem 0;
   min-height: 44px;
-  border-bottom: 2px dashed var(--neo-black);
-  color: var(--neo-black);
+  border-bottom: 2px dashed var(--mobile-panel-border);
+  color: var(--mobile-panel-fg);
   text-decoration: none;
   touch-action: manipulation;
 }
@@ -222,13 +288,13 @@ body.mobile-nav-open {
 
 /* Grid visible through hero & glass sections (like reference design) */
 .hero-grid-section {
-  background: transparent;
-  color: #000000;
+  background: var(--hero-bg);
+  color: var(--hero-fg);
 }
 
 .hero-grid-section .section-title--neo,
 .hero-grid-section h1 {
-  color: #000000;
+  color: var(--hero-fg);
   text-shadow:
     3px 3px 0 var(--neo-white),
     6px 6px 0 var(--neo-pink),
@@ -237,11 +303,11 @@ body.mobile-nav-open {
 
 .hero-grid-section p,
 .hero-grid-section .font-body-lg {
-  color: rgba(0, 0, 0, 0.85);
+  color: var(--hero-subtext);
 }
 
 .section-neo--glass {
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--glass-bg);
   backdrop-filter: blur(2px);
 }
 
@@ -335,7 +401,7 @@ body.mobile-nav-open {
 }
 
 .section-neo--pink {
-  background: rgba(42, 40, 36, 0.72);
+  background: var(--neo-pink-band);
 }
 
 .section-neo--cyan {
@@ -607,8 +673,8 @@ body.mobile-nav-open {
   font-weight: 700;
   text-transform: uppercase;
   font-size: 0.85rem;
-  background-color: var(--neo-yellow);
-  color: var(--neo-black);
+  background-color: var(--btn-default-bg);
+  color: var(--btn-default-text);
   border: var(--border-main) !important;
   box-shadow: 4px 4px 0px var(--neo-black) !important;
   cursor: pointer;
@@ -641,7 +707,7 @@ body.mobile-nav-open {
 .neo-btn:hover {
   transform: translate(2px, 2px) scale(1.05);
   box-shadow: 2px 2px 0px var(--neo-black) !important;
-  background-color: var(--neo-cyan);
+  background-color: var(--btn-default-hover-bg);
 }
 
 .neo-btn:active {
@@ -649,20 +715,110 @@ body.mobile-nav-open {
   box-shadow: 0px 0px 0px var(--neo-black) !important;
 }
 
-.neo-btn.btn-pink { background-color: var(--neo-pink); }
-.neo-btn.btn-pink:hover { background-color: var(--neo-green); }
+/* Mobile: smoother and less jumpy button feedback */
+@media (hover: none), (pointer: coarse) {
+  .neo-btn {
+    transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, background-color 0.18s ease;
+  }
 
-.neo-btn.btn-green { background-color: var(--neo-green); }
-.neo-btn.btn-green:hover { background-color: var(--neo-orange); }
+  .neo-btn:hover {
+    transform: translate(1px, 1px) scale(1.01);
+    box-shadow: 3px 3px 0px var(--neo-black) !important;
+  }
 
-.neo-btn.btn-cyan { background-color: var(--neo-cyan); }
-.neo-btn.btn-cyan:hover { background-color: var(--neo-yellow); }
+  .neo-btn:active {
+    transform: translate(2px, 2px) scale(0.99);
+    box-shadow: 1px 1px 0px var(--neo-black) !important;
+  }
+
+  .neo-btn::after {
+    transition: width 0.28s ease, height 0.28s ease;
+  }
+
+  .neo-card,
+  .project-card-neo,
+  .timeline-card,
+  .skill-tag-card,
+  .cert-card,
+  .neo-badge,
+  .nav-logo-neo,
+  .nav-link-neo,
+  .stats-board,
+  .window-dot {
+    transition: transform 0.14s ease-out, box-shadow 0.14s ease-out, background-color 0.18s ease, color 0.18s ease;
+  }
+
+  .neo-card:hover {
+    transform: translate(2px, 2px) scale(1.01);
+    box-shadow: 4px 4px 0 var(--neo-black) !important;
+  }
+
+  .project-card-neo:hover {
+    transform: rotate(-0.4deg) translate(-1px, -1px);
+  }
+
+  .timeline-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 7px 7px 0 var(--neo-black) !important;
+  }
+
+  .timeline-card:hover::before {
+    transform: scale(1.18) rotate(90deg);
+  }
+
+  .skill-tag-card:hover {
+    transform: translateX(3px) scale(1.015);
+    box-shadow: 5px 5px 0 var(--neo-black);
+  }
+
+  .skill-tag-card:hover .skill-icon {
+    transform: rotate(180deg) scale(1.08);
+  }
+
+  .cert-card:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0 var(--neo-black);
+  }
+
+  .neo-badge:hover {
+    transform: translateY(-1px) rotate(-1deg);
+    box-shadow: 2px 3px 0 var(--neo-black);
+  }
+
+  .nav-logo-neo:hover,
+  .nav-link-neo:hover {
+    transform: translate(-1px, -1px);
+  }
+
+  .nav-hamburger:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 var(--neo-black) !important;
+  }
+
+  .window-dot:active {
+    transform: scale(0.95);
+  }
+
+  .marquee-item:hover {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.neo-btn.btn-pink { background-color: var(--btn-pink-bg); }
+.neo-btn.btn-pink:hover { background-color: var(--btn-pink-hover-bg); }
+
+.neo-btn.btn-green { background-color: var(--btn-green-bg); }
+.neo-btn.btn-green:hover { background-color: var(--btn-green-hover-bg); }
+
+.neo-btn.btn-cyan { background-color: var(--btn-cyan-bg); }
+.neo-btn.btn-cyan:hover { background-color: var(--btn-cyan-hover-bg); }
 
 .neo-btn.btn-secondary {
-  background-color: var(--neo-white);
+  background-color: var(--btn-secondary-bg);
 }
 .neo-btn.btn-secondary:hover {
-  background-color: var(--neo-yellow);
+  background-color: var(--btn-secondary-hover-bg);
 }
 
 /* Badges */
@@ -816,11 +972,11 @@ body.mobile-nav-open {
 /* Stats board */
 .stats-board {
   border: var(--border-main);
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: var(--stats-bg);
   box-shadow: var(--neo-card-shadow);
   padding: 1.2rem;
   font-family: var(--font-mono);
-  color: #000000;
+  color: var(--stats-fg);
 }
 
 .stats-board-row {
@@ -837,7 +993,7 @@ body.mobile-nav-open {
 
 .stats-board-label {
   font-weight: 700;
-  color: #000000;
+  color: var(--stats-fg);
   flex-shrink: 0;
 }
 
